@@ -1,4 +1,9 @@
 import React, { Component } from "react";
+import { Router, Route, Switch ,NavLink} from "dva/router";
+
+import Add from '../../components/add'
+
+
 import style from "./home_style.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
@@ -42,17 +47,18 @@ class Homepage extends Component {
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
                 className={style.list_style}
+                style={{width:200,background:'red'}}
               >
                 <SubMenu
                   key="sub1"
                   title={
-                    <span className={style.list_style}>
+                    <span>
                       <Icon type="mail" />
-                      <span className={style.list_style}>试题管理</span>
+                      <span>试题管理</span>
                     </span>
                   }
                 >
-                  <Menu.Item key="5">添加试题</Menu.Item>
+                  <Menu.Item key="5"><NavLink to='/homepage/add'>添加试题</NavLink></Menu.Item>
                   <Menu.Item key="6">试题分类</Menu.Item>
                   <Menu.Item key="7">查看试题</Menu.Item>
                 </SubMenu>
@@ -60,10 +66,9 @@ class Homepage extends Component {
                   key="sub2"
                   title={
                     <span
-                    className={style.list_style}
                     >
                       <Icon type="appstore" />
-                      <span className={style.list_style}>用户管理</span>
+                      <span>用户管理</span>
                     </span>
                   }
                 >
@@ -72,11 +77,10 @@ class Homepage extends Component {
                 </SubMenu>
                 <SubMenu
                   key="sub3"
-                  
                   title={
-                    <span className={style.list_style}>
+                    <span>
                       <Icon type="appstore" />
-                      <span className={style.list_style}>考试管理</span>
+                      <span>考试管理</span>
                     </span>
                   }
                 >
@@ -86,9 +90,9 @@ class Homepage extends Component {
                 <SubMenu
                   key="sub4"
                   title={
-                    <span className={style.list_style}>
+                    <span>
                       <Icon type="appstore" />
-                      <span className={style.list_style}>班级管理</span>
+                      <span>班级管理</span>
                     </span>
                   }
                 >
@@ -99,9 +103,9 @@ class Homepage extends Component {
                 <SubMenu
                   key="sub5"
                   title={
-                    <span className={style.list_style}>
+                    <span>
                       <Icon type="appstore" />
-                      <span className={style.list_style}>阅卷管理</span>
+                      <span>阅卷管理</span>
                     </span>
                   }
                 >
@@ -110,7 +114,13 @@ class Homepage extends Component {
               </Menu>
             </div>
           </div>
-          <div className={style.bottom_right} />
+          <div className={style.bottom_right} >
+              <Switch>
+                  <Route path='/homepage/add' component={Add}></Route>
+                  
+              </Switch>
+          
+          </div>
         </div>
       </div>
     );
