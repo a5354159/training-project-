@@ -12,12 +12,44 @@
 }
 .login_wraper {
   width: 400px;
-  padding: 40px 20px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  background: #fff;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
   position: absolute;
-  right: 15%;
-  top: 25%;
+  left: 50%;
+  top: 50%;
+  transform: translate(30%, -60%);
+  border-radius: 5px;
   box-sizing: border-box;
+  padding-top: 40px;
+}
+.iptbox {
+  width: 358px;
+  height: 40px;
+  background-color: #f0f0f0;
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+}
+.ipt {
+  flex: 1;
+  height: 100%;
+  font-size:18px; 
+}
+.textArea {
+  width: 358px;
+  height: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+span {
+  color: #409eff;
+}
+.loginBtn {
+  margin-top: 30px;
+  width: 358px;
+  height: 40px;
 }
