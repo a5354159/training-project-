@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function myPromise(fn) {
+    if (fn && typeof fn !== "function") {
+      throw new Error("Promise resolver is not a function");
+    }
+    this.callBacks = [];
+    const resolver = res => {
+      setTimeout(() => {
+        this.callBacks.forEach(cb => {
+          cb(res);
+        });
+      }, 0);
+    };
+    //将resolve作为实参传入fn中,fn的异步什么时候有结果再去执行resolve
+    fn(resolver);
+  }
+  //注册回调函数，successCallback将会被压进Promise容器中的callBacks队列
+  myPromise.prototype.then = function(successCallback) {
+    this.callBacks.push(successCallback);
+  };
+  const mypromise = new myPromise(function(resolver) {
+    setTimeout(() => {
+      resolver("我是传给Promise内执行函数的参数");
+    });
+  });
+  mypromise
+    .then(res => {
+      console.log(res);
+    })
+    .then(res => {
+      console.log("ssss");
+    });
+</script>

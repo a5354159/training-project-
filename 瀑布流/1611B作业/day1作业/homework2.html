@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        img{
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 2.用async实现十张图片的依次加载和并行加载     
+        // function MyPromise(){
+        //     this.status = 'pending';
+        //     this.msg = '';
+        //     var process = arguments[0];
+        //     var that = this;
+        //     process(function(){
+        //         that.status = 'resolve';
+        //         that.msg = arguments[0]
+        //     },function(){
+        //         that.status = 'reject';
+        //         that.msg = arguments[0]
+        //     })
+        // }
+        // MyPromise.prototype.then = function(){
+        //     if(this.status == 'resolve'){
+        //         arguments[0](this.msg)
+        //     }
+        //     if(this.status == 'reject'){
+        //         arguments[1](this.msg)
+        //     }
+        // }
+
+        //依次加载
+        const imgList = ['../images/1.jpg','../images/2.jpg','../images/3.jpg','../images/4.jpg','../images/5.jpg','../images/6.jpg','../images/7.jpg','../images/8.jpg','../images/9.jpg','../images/10.jpg'];
+        function loadImg(src){
+            return new Promise((resolve,reject)=>{
+                let img = new Image();
+                img.src = src;
+                document.body.appendChild(img)
+                setTimeout(() => {
+                    resolve(true)
+                }, 1000);
+            })
+        }
+        async function fSync(){
+            for(var i of imgList){
+                await loadImg(i)
+            }
+        }
+        fSync()
+        //并行加载
+        function loadImg2(src){
+            return new Promise((resolve,reject)=>{
+                let img = new Image();
+                img.onload = () =>{
+                    resolve(true)
+                }
+                img.src = src;
+                document.body.appendChild(img)
+            })
+        }
+        async function bSync(){
+            for(var i of imgList){
+                await loadImg2(i)
+            }
+        }
+        bSync()
+    </script>
+</body>
+</html>
