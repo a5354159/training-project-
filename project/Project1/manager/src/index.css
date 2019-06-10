@@ -8,3 +8,6 @@ html, body, :global(#root) {
   height: 100%;
 }
 
+.ant-menu-dark{
+  background: red !important;
+}

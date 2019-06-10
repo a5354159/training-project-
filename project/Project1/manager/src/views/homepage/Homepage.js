@@ -7,16 +7,15 @@ import { Menu, Icon, Button } from "antd";
 const { SubMenu } = Menu;
 
 class Homepage extends Component {
- 
-    state = {
-      collapsed: false
-    };
+  state = {
+    collapsed: false
+  };
 
-    toggleCollapsed = () => {
-      this.setState({
-        collapsed: !this.state.collapsed
-      });
-    };
+  toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  };
   render() {
     return (
       <div className={style.wrap}>
@@ -26,61 +25,87 @@ class Homepage extends Component {
           </div>
           <div className={style.sing}>
             <span>
-              <span><img src='https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png'></img></span> chenmanjie
+              <span>
+                <img src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" />
+              </span>{" "}
+              chenmanjie
             </span>
           </div>
         </div>
         <div className={style.land_bottom}>
           <div className={style.bottom_left}>
-            <div style={{ width: 256 }}>
+            <div className={style.actives}>
               <Menu
                 defaultSelectedKeys={["1"]}
                 defaultOpenKeys={["sub1"]}
                 mode="inline"
                 theme="dark"
                 inlineCollapsed={this.state.collapsed}
+                className={style.list_style}
               >
-                <Menu.Item key="1">
-                  <Icon type="pie-chart" />
-                  <span>Option 1</span>
-                </Menu.Item>
-                <Menu.Item key="2">
-                  <Icon type="desktop" />
-                  <span>Option 2</span>
-                </Menu.Item>
-                <Menu.Item key="3">
-                  <Icon type="inbox" />
-                  <span>Option 3</span>
-                </Menu.Item>
                 <SubMenu
                   key="sub1"
                   title={
-                    <span>
+                    <span className={style.list_style}>
                       <Icon type="mail" />
-                      <span>Navigation One</span>
+                      <span className={style.list_style}>试题管理</span>
                     </span>
                   }
                 >
-                  <Menu.Item key="5">Option 5</Menu.Item>
-                  <Menu.Item key="6">Option 6</Menu.Item>
-                  <Menu.Item key="7">Option 7</Menu.Item>
-                  <Menu.Item key="8">Option 8</Menu.Item>
+                  <Menu.Item key="5">添加试题</Menu.Item>
+                  <Menu.Item key="6">试题分类</Menu.Item>
+                  <Menu.Item key="7">查看试题</Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
                   title={
-                    <span>
+                    <span
+                    className={style.list_style}
+                    >
                       <Icon type="appstore" />
-                      <span>Navigation Two</span>
+                      <span className={style.list_style}>用户管理</span>
                     </span>
                   }
                 >
-                  <Menu.Item key="9">Option 9</Menu.Item>
-                  <Menu.Item key="10">Option 10</Menu.Item>
-                  <SubMenu key="sub3" title="Submenu">
-                    <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                  </SubMenu>
+                  <Menu.Item key="9">添加用户</Menu.Item>
+                  <Menu.Item key="10">用户展示</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub3"
+                  
+                  title={
+                    <span className={style.list_style}>
+                      <Icon type="appstore" />
+                      <span className={style.list_style}>考试管理</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="11">添加考试</Menu.Item>
+                  <Menu.Item key="12">试卷列表</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub4"
+                  title={
+                    <span className={style.list_style}>
+                      <Icon type="appstore" />
+                      <span className={style.list_style}>班级管理</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="13">班级管理</Menu.Item>
+                  <Menu.Item key="14">教室管理</Menu.Item>
+                  <Menu.Item key="15">学生管理</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub5"
+                  title={
+                    <span className={style.list_style}>
+                      <Icon type="appstore" />
+                      <span className={style.list_style}>阅卷管理</span>
+                    </span>
+                  }
+                >
+                  <Menu.Item key="16">特批班级</Menu.Item>
                 </SubMenu>
               </Menu>
             </div>
