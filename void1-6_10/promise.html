@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body></body>
+</html>
+<script>
+  function promise(sub) {
+    if (sub && typeof sub !== "function") {
+      throw new Error("找不到");
+    }
+    this.callBacks = [];
+    const resolver = res => {
+      setTimeout(() => {
+        this.callBacks.forEach(cb => {
+          cb(res);
+        })
+      }, 0)
+    }
+
+    sub(resolver);
+  }
+  
+  promise.prototype.then = function(successCallback) {
+    this.callBacks.push(successCallback);
+  }
+
+  const promise = new Promise(function(resolver) {
+    setTimeout(() => {
+      resolver('参数');
+    });
+  })
+
+  promise.then(res => {
+      console.log(res);
+    })
+    .then(res => {
+      console.log("ssss");
+    });
+</script>
