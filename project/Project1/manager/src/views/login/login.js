@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import styles from "./login.css";
+import { connect } from 'dva';
+import 'antd/dist/antd.css'
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
+
 import axios from "axios";
 class Login extends Component {
   constructor(props) {
@@ -9,10 +13,65 @@ class Login extends Component {
       pwdValue: ""
     };
   }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+
   render() {
+    const { getFieldDecorator } = this.props.form;
     return (
       <div className={styles.main}>
-        <div className={styles.login_wraper}>
+         <div className={styles.login_wraper}>
+      <Form onSubmit={this.handleSubmit} className="login-form">
+        <Form.Item>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Username"
+              // value={this.state.nameVlue}
+              onChange={e => {
+                this.nameVlues(e);
+              }}
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+              // value={this.state.pwdValue}
+              onChange={e => {
+                this.pwdValues(e);
+              }}
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true,
+          })(<Checkbox>Remember me</Checkbox>)}
+          <Button type="primary" htmlType="submit" className="login-form-button" onClick={() => {
+              this.add();
+            }}>
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
+      
+        {/*
           <div className={styles.iptbox}>
             <input
               className={styles.ipt}
@@ -33,22 +92,21 @@ class Login extends Component {
               }}
             />
           </div>
-          <div className={styles.textArea}>
-            <span />
-            <span>忘记密码</span>
-          </div>
-          <button
-            className={styles.loginBtn}
-            onClick={() => {
-              this.add();
-            }}
-          >
-            登录
-          </button>
-        </div>
+        
+         */}
+         </div>
       </div>
     );
   }
+
+  componentDidMount(){
+    let {login}=this.props;
+    login({
+      user_name:'chenmanjie',
+      user_pwd:'Chenmanjie123!'
+    })
+  }
+
   add() {
     let that = this;
     if (this.state.nameVlue !== "" && this.state.pwdValue !== "") {
@@ -87,4 +145,19 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state=>{
+  console.log('state...', state);
+  return {}
+}
+const mapDisaptchToProps = dispatch=>{
+  return {
+    login(payload){
+      dispatch({
+        type: '/homepage',
+        payload
+      })
+    }
+  }
+}                     
+  
+export default connect(mapStateToProps,mapDisaptchToProps)(Form.create({ name: 'normal_login' })(Login))
