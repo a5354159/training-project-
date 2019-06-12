@@ -25,15 +25,15 @@ class add extends Component {
         >
           <div>
             <h3>题目信息</h3>
-            <div class="ant-row ant-form-item">
-              <div class="ant-form-item-label">
-                <label class="" title="题干">
+            <div className="ant-row ant-form-item">
+              <div className="ant-form-item-label">
+                <label className="" title="题干">
                   题干
                 </label>
               </div>
-              <div class="ant-form-item-control-wrapper">
+              <div className="ant-form-item-control-wrapper">
                 <input
-                  class="ant-input ant-input-lg EditQuestions_titleInput__2Pvep"
+                  className="ant-input ant-input-lg EditQuestions_titleInput__2Pvep"
                   placeholder="请输入题目标题，不超过20个字"
                   type="text"
                   // value=""
@@ -43,14 +43,14 @@ class add extends Component {
             </div>
 
             {/* 题目主题 */}
-            <div class="ant-row ant-form-item">
-              <div class="ant-form-item-label">
-                <label class="" title="题目主题">
+            <div className="ant-row ant-form-item">
+              <div className="ant-form-item-label">
+                <label className="" title="题目主题">
                   题目主题
                 </label>
               </div>
               <div
-                class="for-container"
+                className="for-container"
                 // style={{height: 600}}
               >
                 {/* <pre> </pre> */}
