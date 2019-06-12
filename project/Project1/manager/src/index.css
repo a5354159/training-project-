@@ -11,3 +11,6 @@ html, body, :global(#root) {
 .ant-menu-dark{
   background: red !important;
 }
+:global(.login-form){
+  width: 100%;
+}
