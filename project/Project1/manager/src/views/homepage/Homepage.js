@@ -140,6 +140,8 @@ import React, { Component } from "react";
 import { Router, Route, Switch, NavLink } from "dva/router";
 
 import Add from "../../components/add";
+import Wodetongzhuoshizhenghao from "../../components/wodetongzhuishizhenghao";
+// src\components\wodetongzhuishizhenghao.js
 import Addlist from "../../components/addlist";
 import RemoteList from "../../components/remoteList";
 
@@ -268,7 +270,7 @@ class Homepage extends Component {
               style={{ padding: '14px 24px 24px' }}
             >
               <Switch>
-              <Route path="/homepage/add" component={Add} >aaa</Route>
+              <Route path="/homepage/add" component={Wodetongzhuoshizhenghao} >aaa</Route>
               <Route path="/homepage/addlist" component={Addlist} />
               <Route path="/homepage/remote" component={RemoteList} />
             </Switch>
