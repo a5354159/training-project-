@@ -29,11 +29,11 @@ function Login(props) {
     props.form.validateFields((err, values) => {
       if (!err) {
         // 调登录接口
-        // props.login({
-        //   user_name: values.username,
-        //   user_pwd: values.password
-        // });
-      props.history.push('/homepage')
+        props.login({
+          user_name: values.username,
+          user_pwd: values.password
+        });
+      // props.history.push('/homepage')
       }
     });
   };
@@ -105,17 +105,17 @@ Login.defaultProps = {};
 
 const mapStateToProps = state => {
   return {
-    // ...state.user
+    ...state.user
   };
 };
 
 const mapDisaptchToProps = dispatch => {
   return {
     login(payload) {
-      // dispatch({
-      //   type: "user/login",
-      //   payload
-      // });
+      dispatch({
+        type: "user/login",
+        payload
+      });
     }
   };
 };

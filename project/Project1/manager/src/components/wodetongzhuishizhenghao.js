@@ -7,7 +7,7 @@ class Wodetongzhuoshizhenghao extends Component {
     }
     render() {
       return (
-'aaa'
+            'aaa'
         );
     }
   }
