@@ -14,7 +14,7 @@ function RouterConfig({ history }) {
 ======= */}
         {/* <Redirect exact from="/" to="login" /> */}
         <Route path="/login" component={Login} />
-        <Route path="/homepage" component={Homepage} />
+        <Route path="/" component={Homepage} />
 {/* >>>>>>> 059a8b7e4527a2e4258bd5353c77311109a5acb7 */}
       </Switch>
     </Router>
