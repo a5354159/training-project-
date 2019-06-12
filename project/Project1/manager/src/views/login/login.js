@@ -1,35 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { Form, Icon, Input, Button, Checkbox } from "antd";
+import React, { useEffect } from "react";
+import { Form, Icon, Input, Button, Checkbox, message } from "antd";
 import { connect } from "dva";
-import styles from "./login.scss";
+import "./login.scss";
 
-function LoginPage(props) {
-  // 获取login
-  let { login,history } = props;
+function Login(props) {
+  console.log(props)
+  // 判断是否登陆
   useEffect(() => {
-    login({
-      user_name: "chenmanjie",
-      user_pwd: "Chenmanjie123!"
-    });
-  }, []);
+    if (props.islogin === 1) {
+      // 1.提示登陆成功
+      message.success("登陆成功");
+      // 2.存储cookie
+      // 3.跳转主页面
+      console.log("props.history", props.history);
+      let pathName = decodeURIComponent(
+        props.history.location.search.split("=")[1]
+      );
+      props.history.replace(pathName);
+    } else if (props.islogin === -1) {
+      // 登陆失败
+      message.error("用户名或密码错误");
+    }
+  }, [props.islogin]);
 
   // 处理表单提交
   let handleSubmit = e => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         // 调登录接口
-        login({
+        props.login({
           user_name: values.username,
           user_pwd: values.password
         });
-        if(values.remember){
-          history.push('/homepage')
-        }
       }
     });
   };
+
   // 表单校验
   const { getFieldDecorator } = props.form;
   return (
@@ -73,7 +80,7 @@ function LoginPage(props) {
               initialValue: true
             })(<Checkbox>记住密码</Checkbox>)}
             <a className="login-form-forgot" href="">
-              忘记密码
+             忘记密码
             </a>
             <Button
               type="primary"
@@ -82,7 +89,7 @@ function LoginPage(props) {
             >
               登录
             </Button>
-            Or <a href="">您还没有账号 请注册</a>
+            请先 <a href="">注册</a>
           </Form.Item>
         </Form>
       </div>
@@ -91,13 +98,14 @@ function LoginPage(props) {
 }
 
 // props的类型检查
-LoginPage.propTypes = {};
+Login.propTypes = {};
 // props的默认值
-LoginPage.defaultProps = {};
+Login.defaultProps = {};
 
 const mapStateToProps = state => {
-  console.log("state...", state);
-  return {};
+  return {
+    ...state.user
+  };
 };
 
 const mapDisaptchToProps = dispatch => {
@@ -114,4 +122,4 @@ const mapDisaptchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDisaptchToProps
-)(Form.create()(LoginPage));
+)(Form.create()(Login));
