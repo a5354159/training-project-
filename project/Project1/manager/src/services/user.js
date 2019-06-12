@@ -8,3 +8,10 @@ export function login(params){
     data: params
   })
 }
+export function query(params) {
+  return request({
+    url:'/user/homepage',
+    method:'POST',
+    data:params
+  });
+}

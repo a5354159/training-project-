@@ -2,9 +2,10 @@ import React, { Component } from "react";
 import { Router, Route, Switch, NavLink } from "dva/router";
 
 import Add from "../../components/add";
+import Addlist from "../../components/addlist";
+import RemoteList from "../../components/remoteList";
 
 import style from "./home_style.css";
-import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
 import { Menu, Icon, Button } from "antd";
 
@@ -60,8 +61,12 @@ class Homepage extends Component {
                   <Menu.Item key="5">
                     <NavLink to="/homepage/add">添加试题</NavLink>
                   </Menu.Item>
-                  <Menu.Item key="6">试题分类</Menu.Item>
-                  <Menu.Item key="7">查看试题</Menu.Item>
+                  <Menu.Item key="6">
+                    <NavLink to="/homepage/addlist">试题分类</NavLink>
+                  </Menu.Item>
+                  <Menu.Item key="7">
+                    <NavLink to="/homepage/remote">查看试题</NavLink>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -116,7 +121,10 @@ class Homepage extends Component {
           </div>
           <div className={style.bottom_right}>
             <Switch>
+              {/* 试题管理 */}
               <Route path="/homepage/add" component={Add} />
+              <Route path="/homepage/addlist" component={Addlist} />
+              <Route path="/homepage/remote" component={RemoteList} />
             </Switch>
           </div>
         </div>
