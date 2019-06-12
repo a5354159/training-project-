@@ -2,7 +2,6 @@
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: column;
     overflow: hidden;
 }
 .land_top{
@@ -13,6 +12,7 @@
     align-items: center;
     box-sizing: border-box;
     padding:0 50px;
+    background: #fff;
 }
 .top_img{
     width: 120px;
@@ -36,10 +36,12 @@ overflow: hidden;
 .bottom_left{
     background: #000c17;
     color: rgb(175, 170, 170);
+    overflow: hidden;
 }
 
 .actives{
     height: 100%;
+    /* overflow-y: scroll; */
 }
 .list_style{
     background: #08122eea !important;
@@ -63,3 +65,8 @@ overflow: hidden;
     background: red !important;
 } */
 /* ant-menu ant-menu-dark ant-menu-root ant-menu-inline */
+/* #components-layout-demo-fixed-sider .logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 16px;
+  } */

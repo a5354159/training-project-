@@ -1,17 +1,16 @@
 import React, { Component } from "react";
-import { Router, Route, Switch ,NavLink} from "dva/router";
+import { Router, Route, Switch, NavLink } from "dva/router";
 
-import Add from '../../components/add'
-import Addlist from '../../components/addlist'
-import RemoteList from '../../components/remoteList'
-
+import Add from "../../components/add";
+import Addlist from "../../components/addlist";
+import RemoteList from "../../components/remoteList";
 
 import style from "./home_style.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
-import { Menu, Icon, Button } from "antd";
-
+import { Menu, Icon, Button, Layout } from "antd";
 const { SubMenu } = Menu;
+const { Header, Footer, Sider, Content } = Layout;
 
 class Homepage extends Component {
   state = {
@@ -25,8 +24,8 @@ class Homepage extends Component {
   };
   render() {
     return (
-      <div className={style.wrap}>
-        <div className={style.land_top}>
+      <Layout className={style.wrap} style={{ flexDirection: "column" }}>
+        <Header className={style.land_top} style={{ background: "#fff" }}>
           <div className={style.top_img}>
             <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1551624718911&di=4a7004f8d71bd8da84d4eadf1b59e689&imgtype=0&src=http%3A%2F%2Fimg105.job1001.com%2Fupload%2Falbum%2F2014-10-15%2F1413365052_95IE3msH.jpg" />
           </div>
@@ -38,97 +37,107 @@ class Homepage extends Component {
               chenmanjie
             </span>
           </div>
-        </div>
+        </Header>
         <div className={style.land_bottom}>
-          <div className={style.bottom_left}>
-            <div className={style.actives}>
-              <Menu
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                mode="inline"
-                theme="dark"
-                inlineCollapsed={this.state.collapsed}
-                className={style.list_style}
-                style={{width:200,background:'red'}}
+          <Sider
+            style={{
+              overflow: "auto",
+              height: "100vh",
+              left: 0
+            }}
+          >
+            <Menu
+              defaultSelectedKeys={["1"]}
+              defaultOpenKeys={["sub1"]}
+              mode="inline"
+              theme="dark"
+              className={style.list_style}
+              style={{ width: 200, background: "red" }}
+            >
+              <SubMenu
+                key="sub1"
+                title={
+                  <span>
+                    <Icon type="mail" />
+                    <span>试题管理</span>
+                  </span>
+                }
               >
-                <SubMenu
-                  key="sub1"
-                  title={
-                    <span>
-                      <Icon type="mail" />
-                      <span>试题管理</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="5"><NavLink to='/homepage/add'>添加试题</NavLink></Menu.Item>
-                  <Menu.Item key="6"><NavLink to='/homepage/addlist'>试题分类</NavLink></Menu.Item>
-                  <Menu.Item key="7"><NavLink to='/homepage/remote'>查看试题</NavLink></Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub2"
-                  title={
-                    <span
-                    >
-                      <Icon type="appstore" />
-                      <span>用户管理</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="9">添加用户</Menu.Item>
-                  <Menu.Item key="10">用户展示</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub3"
-                  title={
-                    <span>
-                      <Icon type="appstore" />
-                      <span>考试管理</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="11">添加考试</Menu.Item>
-                  <Menu.Item key="12">试卷列表</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub4"
-                  title={
-                    <span>
-                      <Icon type="appstore" />
-                      <span>班级管理</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="13">班级管理</Menu.Item>
-                  <Menu.Item key="14">教室管理</Menu.Item>
-                  <Menu.Item key="15">学生管理</Menu.Item>
-                </SubMenu>
-                <SubMenu
-                  key="sub5"
-                  title={
-                    <span>
-                      <Icon type="appstore" />
-                      <span>阅卷管理</span>
-                    </span>
-                  }
-                >
-                  <Menu.Item key="16">特批班级</Menu.Item>
-                </SubMenu>
-              </Menu>
-            </div>
-          </div>
-          <div className={style.bottom_right} >
+                <Menu.Item key="5">
+                  <NavLink to="/homepage/add">添加试题</NavLink>
+                </Menu.Item>
+                <Menu.Item key="6">
+                  <NavLink to="/homepage/addlist">试题分类</NavLink>
+                </Menu.Item>
+                <Menu.Item key="7">
+                  <NavLink to="/homepage/remote">查看试题</NavLink>
+                </Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub2"
+                title={
+                  <span>
+                    <Icon type="appstore" />
+                    <span>用户管理</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="9">添加用户</Menu.Item>
+                <Menu.Item key="10">用户展示</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub3"
+                title={
+                  <span>
+                    <Icon type="appstore" />
+                    <span>考试管理</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="11">添加考试</Menu.Item>
+                <Menu.Item key="12">试卷列表</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub4"
+                title={
+                  <span>
+                    <Icon type="appstore" />
+                    <span>班级管理</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="13">班级管理</Menu.Item>
+                <Menu.Item key="14">教室管理</Menu.Item>
+                <Menu.Item key="15">学生管理</Menu.Item>
+              </SubMenu>
+              <SubMenu
+                key="sub5"
+                title={
+                  <span>
+                    <Icon type="appstore" />
+                    <span>阅卷管理</span>
+                  </span>
+                }
+              >
+                <Menu.Item key="16">特批班级</Menu.Item>
+              </SubMenu>
+            </Menu>
+          </Sider>
+          <Content style={{ overflow: "auto" }}>
+            <div
+              style={{ padding: '14px 24px 24px' }}
+            >
               <Switch>
-                {/* 试题管理 */}
-                  <Route path='/homepage/add' component={Add}></Route>
-                  <Route path='/homepage/addlist' component={Addlist}></Route>
-                  <Route path='/homepage/remote' component={RemoteList}></Route>
-                  
+              <Route path="/homepage/add" component={Add} />
+              <Route path="/homepage/addlist" component={Addlist} />
+              <Route path="/homepage/remote" component={RemoteList} />
+            </Switch>
+            </div>
 
-              </Switch>
-          
-          </div>
+            
+          </Content>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

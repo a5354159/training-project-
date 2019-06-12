@@ -1,163 +1,117 @@
-import React, { Component } from "react";
-import styles from "./login.css";
-import { connect } from 'dva';
-import 'antd/dist/antd.css'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import React, { useState, useEffect } from "react";
+import { Form, Icon, Input, Button, Checkbox } from "antd";
+import { connect } from "dva";
+import styles from "./login.scss";
 
-import axios from "axios";
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      nameVlue: "",
-      pwdValue: ""
-    };
-  }
+function LoginPage(props) {
+  // 获取login
+  let { login,history } = props;
+  useEffect(() => {
+    login({
+      user_name: "chenmanjie",
+      user_pwd: "Chenmanjie123!"
+    });
+  }, []);
 
-  handleSubmit = e => {
+  // 处理表单提交
+  let handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
+        console.log("Received values of form: ", values);
+        // 调登录接口
+        login({
+          user_name: values.username,
+          user_pwd: values.password
+        });
+        if(values.remember){
+          history.push('/homepage')
+        }
       }
     });
   };
-
-  render() {
-    const { getFieldDecorator } = this.props.form;
-    return (
-      <div className={styles.main}>
-         <div className={styles.login_wraper}>
-      <Form onSubmit={this.handleSubmit} className="login-form">
-        <Form.Item>
-          {getFieldDecorator('username', {
-            rules: [{ required: true, message: 'Please input your username!' }],
-          })(
-            <Input
-              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              placeholder="Username"
-              // value={this.state.nameVlue}
-              onChange={e => {
-                this.nameVlues(e);
-              }}
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('password', {
-            rules: [{ required: true, message: 'Please input your Password!' }],
-          })(
-            <Input
-              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-              type="password"
-              placeholder="Password"
-              // value={this.state.pwdValue}
-              onChange={e => {
-                this.pwdValues(e);
-              }}
-            />,
-          )}
-        </Form.Item>
-        <Form.Item>
-          {getFieldDecorator('remember', {
-            valuePropName: 'checked',
-            initialValue: true,
-          })(<Checkbox>Remember me</Checkbox>)}
-          <Button type="primary" htmlType="submit" className="login-form-button" onClick={() => {
-              this.add();
-            }}>
-            Log in
-          </Button>
-        </Form.Item>
-      </Form>
-      
-        {/*
-          <div className={styles.iptbox}>
-            <input
-              className={styles.ipt}
-              placeholder="请输入用户名"
-              value={this.state.nameVlue}
-              onChange={e => {
-                this.nameVlues(e);
-              }}
-            />
-          </div>
-          <div className={styles.iptbox}>
-            <input
-              className={styles.ipt}
-              placeholder="请输入密码"
-              value={this.state.pwdValue}
-              onChange={e => {
-                this.pwdValues(e);
-              }}
-            />
-          </div>
-        
-         */}
-         </div>
+  // 表单校验
+  const { getFieldDecorator } = props.form;
+  return (
+    <div className="main">
+      <div className="login_box">
+        <Form onSubmit={handleSubmit} className="login-form">
+          <Form.Item>
+            {getFieldDecorator("username", {
+              validateTrigger: "onBlur",
+              rules: [{ required: true, message: "请输入正确的用户名" }]
+            })(
+              <Input
+                prefix={
+                  <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                placeholder="Username"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator("password", {
+              rules: [
+                {
+                  pattern: /^(?:(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])).*$/,
+                  message: "请输入正确的密码"
+                }
+              ]
+            })(
+              <Input
+                prefix={
+                  <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
+                }
+                type="password"
+                placeholder="Password"
+              />
+            )}
+          </Form.Item>
+          <Form.Item>
+            {getFieldDecorator("remember", {
+              valuePropName: "checked",
+              initialValue: true
+            })(<Checkbox>记住密码</Checkbox>)}
+            <a className="login-form-forgot" href="">
+              忘记密码
+            </a>
+            <Button
+              type="primary"
+              htmlType="submit"
+              className="login-form-button"
+            >
+              登录
+            </Button>
+            Or <a href="">您还没有账号 请注册</a>
+          </Form.Item>
+        </Form>
       </div>
-    );
-  }
-
-  componentDidMount(){
-    let {login}=this.props;
-    login({
-      user_name:'chenmanjie',
-      user_pwd:'Chenmanjie123!'
-    })
-  }
-
-  add() {
-    let that = this;
-    if (this.state.nameVlue !== "" && this.state.pwdValue !== "") {
-      try {
-        axios
-          .post("http://127.0.0.1:7001/user/login", {
-            user_name: this.state.nameVlue,
-            user_pwd: this.state.pwdValue
-          })
-          .then(function(res) {
-            console.log(res)
-            if (res.data.code === 1) {
-              console.log(res.data.token)
-              localStorage.setItem('uid',res.data.token)
-              that.props.history.push('/homepage') 
-            }
-          })
-          .catch(function(error) {
-            alert("您的账号或密码有误");
-          });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  }
-
-  nameVlues(e) {
-    this.setState({
-      nameVlue: e.target.value
-    });
-  }
-  pwdValues(e) {
-    this.setState({
-      pwdValue: e.target.value
-    });
-  }
+    </div>
+  );
 }
 
-const mapStateToProps = state=>{
-  console.log('state...', state);
-  return {}
-}
-const mapDisaptchToProps = dispatch=>{
+// props的类型检查
+LoginPage.propTypes = {};
+// props的默认值
+LoginPage.defaultProps = {};
+
+const mapStateToProps = state => {
+  console.log("state...", state);
+  return {};
+};
+
+const mapDisaptchToProps = dispatch => {
   return {
-    login(payload){
+    login(payload) {
       dispatch({
-        type: '/homepage',
+        type: "user/login",
         payload
-      })
+      });
     }
-  }
-}                     
-  
-export default connect(mapStateToProps,mapDisaptchToProps)(Form.create({ name: 'normal_login' })(Login))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDisaptchToProps
+)(Form.create()(LoginPage));
