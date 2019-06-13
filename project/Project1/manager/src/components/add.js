@@ -77,7 +77,7 @@ class add extends Component {
                     <span class="ant-form-item-children">
                       <Select
                         labelInValue
-                        defaultValue={{ key: "lucy" }}
+                        defaultValue={{ key: "周考1" }}
                         style={{ width: 120 }}
                         onChange={() => {
                           this.handleChange();
