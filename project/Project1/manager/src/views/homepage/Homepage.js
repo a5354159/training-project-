@@ -2,10 +2,10 @@
 import React, { Component } from "react";
 import { Router, Route, Switch, NavLink } from "dva/router";
 
-import Add from "../../components/add";
+// import Add from "../../components/add";
 // import Wodetongzhuoshizhenghao from "../../components/wodetongzhuishizhenghao";
 // src\components\wodetongzhuishizhenghao.js
-import Addlist from "../../components/addlist";
+// import Addlist from "../../components/addlist";
 import RemoteList from "../../components/remoteList";
 
 import style from "./home_style.css";
@@ -13,6 +13,8 @@ import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
 
 import { Menu, Icon, Button, Layout } from "antd";
 
+import Add from "@/components/add.js";
+import Addlist from "@/components/addlist.js";
 
 const { SubMenu } = Menu;
 const { Header, Footer, Sider, Content } = Layout;

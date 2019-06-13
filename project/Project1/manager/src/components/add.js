@@ -1,21 +1,31 @@
-import React, { Component } from "react";
+import React, { Component,useEffect ,useState} from "react";
 
-import { Layout, Menu, Breadcrumb, Icon, Select } from "antd";
-
+import { Layout, Menu, Select, Spin ,Input,Form,Button} from "antd";
+import { connect } from "dva";
+import style from './style.css'
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
 const { Option } = Select;
+
+
 class add extends Component {
   constructor(props) {
     super(props);
     this.state = {};
+    // useEffect(()=>{
+    //   props.getQuestion()
+    // },[props.getQuestion])
+    // let [showDialog,updateDialog]=useState(false)
   }
-
+  
   handleChange(value) {
     console.log(value); // { key: "lucy", label: "Lucy (101)" }
   }
-
+  
   render() {
+    // console.log(this.props)
+    // const {getQuestion}=this.props
+    // console.log(getQuestion)
     return (
       <div>
         <h2 style={{ padding: "20px 0px" }}>添加试题</h2>
@@ -28,6 +38,8 @@ class add extends Component {
             borderRadius: 15
           }}
         >
+        
+          {this.props.loading?<div className={style.loading}><Spin /></div>:null}
           <div>
             <h3>题目信息</h3>
             <div className="ant-row ant-form-item">
@@ -41,13 +53,11 @@ class add extends Component {
                   className="ant-input ant-input-lg EditQuestions_titleInput__2Pvep"
                   placeholder="请输入题目标题，不超过20个字"
                   type="text"
-                  // value=""
                   style={{ width: "400px" }}
                 />
               </div>
             </div>
 
-            {/* 题目主题 */}
             <div className="ant-row ant-form-item">
               <div className="ant-form-item-label">
                 <label className="" title="题目主题">
@@ -56,9 +66,7 @@ class add extends Component {
               </div>
               <div
                 className="for-container"
-                // style={{height: 600}}
               >
-                {/* <pre> </pre> */}
                 <textarea
                   placeholder="请输入内容..."
                   style={{ width: "100%", height: "150px" }}
@@ -66,7 +74,6 @@ class add extends Component {
               </div>
             </div>
 
-            {/* 考试类型 */}
             <div>
               <div className="ant-row ant-form-item">
                 <div className="ant-form-item-label">
@@ -140,7 +147,6 @@ class add extends Component {
               </div>
             </div>
 
-            {/* 答案信息 */}
             <div className="ant-row ant-form-item">
               <div className="ant-form-item-label">
                 <label className="" title="题目主题">
@@ -149,9 +155,7 @@ class add extends Component {
               </div>
               <div
                 className="for-container"
-                // style={{height: 600}}
               >
-                {/* <pre> </pre> */}
                 <textarea
                   placeholder="请输入内容..."
                   style={{ width: "100%", height: "150px" }}
@@ -176,6 +180,29 @@ class add extends Component {
       </div>
     );
   }
+  componentDidMount(){
+    this.props.getQuestion()
+
+  }
 }
 
-export default add;
+const mapStateToProps = state => {
+  console.log("state:", state);
+  return {
+    loading:state.loading.global
+  };
+};
+
+const mapDisaptchToProps = dispatch => {
+  return {
+    getQuestion(payload) {
+      console.log(payload)
+      // dispatch({
+      //   type: "getQuestion/getQuestion",
+      //   payload
+      // });
+    }
+  };
+};
+
+export default connect(mapStateToProps,mapDisaptchToProps)(add);
