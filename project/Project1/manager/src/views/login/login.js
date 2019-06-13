@@ -4,15 +4,16 @@ import { connect } from "dva";
 import "./login.scss";
 
 function Login(props) {
-  console.log(props)
+  // console.log(props)
   // 判断是否登陆
   useEffect(() => {
+    // console.log(props.islogin)
     if (props.islogin === 1) {
       // 1.提示登陆成功
       message.success("登陆成功");
       // 2.存储cookie
       // 3.跳转主页面
-      console.log("props.history", props.history);
+      // console.log("props.history", props.history);
       let pathName = decodeURIComponent(
         props.history.location.search.split("=")[1]
       );

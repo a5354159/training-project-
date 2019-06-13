@@ -15,3 +15,18 @@ export function query(params) {
     data:params
   });
 }
+
+// export function selec(params) {
+//   return request({
+//     url:'/exam/subject',
+//     method:'GET'
+//   });
+// }
+
+
+export function selec(params) {
+  return request({
+    url:'/exam/questions/new',
+    method:'GET'
+  });
+}

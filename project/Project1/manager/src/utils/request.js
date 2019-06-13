@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import {getToken} from './user'
 // create an axios instance
 const service = axios.create({
   baseURL: "http://169.254.0.112:7001/",
@@ -10,7 +10,11 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
-    return config;
+    if (getToken()) {
+      //让每个请求携带authorization
+      config.headers["authorization"] = getToken();
+    }
+    return config
   },
   error => {
     return Promise.reject(error);
