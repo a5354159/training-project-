@@ -8,10 +8,9 @@ export function login(params){
     data: params
   })
 }
-export function query(params) {
+export function query() {
   return request({
-    url:'/exam/questions',
-    method:'POST',
-    data:params
+    url:'/exam/questions/new',
+    method:'GET'
   });
 }
