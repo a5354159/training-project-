@@ -10,7 +10,7 @@ export function login(params){
 }
 export function query(params) {
   return request({
-    url:'/user/homepage',
+    url:'/exam/questions',
     method:'POST',
     data:params
   });

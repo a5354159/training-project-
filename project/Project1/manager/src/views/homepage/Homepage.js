@@ -119,7 +119,9 @@ class Homepage extends Component {
               </Menu>
             </div>
           </div>
-          <div className={style.bottom_right}>
+          <div className={style.bottom_right} 
+style={{ padding: '14px 24px 24px' }}
+>
             <Switch>
               {/* 试题管理 */}
               <Route path="/homepage/add" component={Add} />
