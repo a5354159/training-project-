@@ -22,7 +22,6 @@ class addlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      flag:false,
       visible: false
     };
     
@@ -98,14 +97,10 @@ class addlist extends Component {
           }}
         >
           <div className="style_buttons__z2xtt">
-          Open Modal
             <Button
               type="button"
               className="ant-btn ant-btn-primary ant-btn-lg"
-              // onClick={() => {
-              //   // this.state.flag=true
-              //   this.addList()
-              // }}
+             
               onClick={this.showModal}
             >
               <i aria-label="图标: plus" className="anticon anticon-plus">
@@ -158,12 +153,7 @@ class addlist extends Component {
   componentDidMount() {
     this.props.getQuestion();
   }
-  addList() {
-    console.log("a");
-    this.setState({
-      flag:true
-    })
-  }
+  
 }
 
 const mapStateToProps = state => {
