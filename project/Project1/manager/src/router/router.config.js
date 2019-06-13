@@ -29,24 +29,24 @@ const routerConfig = [{
         path: "/login",
         // redirect: "/login", //登录页面
         component: () =>
-            import ("../page/login")
+            import ("../views/login/login")
     },
     {
-        path: "/home",
+        path: "/homepage",
         component: () =>
-            import ("../page/home"), //登陆之后首页
+            import ("../views/homepage/Homepage"), //登陆之后首页
         children: [{
-                path: "addQuestion", //添加试题
+                path: "add", //添加试题
                 component: () =>
-                    import ("../page/home/addQuestion"),
+                    import ("../components/add"),
                 meta: {
                     title: "添加试题",
                     group: "questionManger"
                 }
             }, {
-                path: "classifyQusetion", //试题分类
+                path: "addlist", //试题分类
                 component: () =>
-                    import ("../page/home/classifyQusetion"),
+                    import ("../components/addlist"),
                 meta: {
                     title: "试题分类",
                     group: "questionManger"
@@ -54,9 +54,9 @@ const routerConfig = [{
             },
 
             {
-                path: "lookQusetion", //查看试题
+                path: "remoteList", //查看试题
                 component: () =>
-                    import ("../page/home/lookQusetion"),
+                    import ("../components/remoteList"),
                 meta: {
                     title: "查看试题",
                     group: "questionManger"
@@ -64,7 +64,7 @@ const routerConfig = [{
             }, {
                 path: "addUser", //添加用户
                 component: () =>
-                    import ("../page/home/addUser"),
+                    import ("../components/addUser"),
                 meta: {
                     title: "添加用户",
                     group: "userManger"
@@ -72,7 +72,7 @@ const routerConfig = [{
             }, {
                 path: "userShow", //用户展示
                 component: () =>
-                    import ("../page/home/userShow"),
+                    import ("../components/userShow"),
                 meta: {
                     title: "用户展示",
                     group: "userManger"
@@ -80,7 +80,7 @@ const routerConfig = [{
             }, {
                 path: "addTest", //添加考试
                 component: () =>
-                    import ("../page/home/addTest"),
+                    import ("../components/addTest"),
                 meta: {
                     title: "添加考试",
                     group: "testManger"
@@ -88,7 +88,7 @@ const routerConfig = [{
             }, {
                 path: "listTest", //考试列表
                 component: () =>
-                    import ("../page/home/listTest"),
+                    import ("../components//listTest"),
                 meta: {
                     title: "考试列表",
                     group: "testManger"
@@ -96,7 +96,7 @@ const routerConfig = [{
             }, {
                 path: "classManger", //班级管理
                 component: () =>
-                    import ("../page/home/classManger"),
+                    import ("../components/classManger"),
                 meta: {
                     title: "班级管理",
                     group: "classManger"
@@ -104,7 +104,7 @@ const routerConfig = [{
             }, {
                 path: "classroomManger", //教室管理
                 component: () =>
-                    import ("../page/home/classroomManger"),
+                    import ("../components/classroomManger"),
                 meta: {
                     title: "教室管理",
                     group: "classManger"
@@ -113,7 +113,7 @@ const routerConfig = [{
             {
                 path: "studentManger", //学生管理
                 component: () =>
-                    import ("../page/home/studentManger"),
+                    import ("../components/studentManger"),
                 meta: {
                     title: "学生管理",
                     group: "classManger"
@@ -122,7 +122,7 @@ const routerConfig = [{
             {
                 path: "volumesManger", //待批班级
                 component: () =>
-                    import ("../page/home/volumesManger"),
+                    import ("../components/volumesManger"),
                 meta: {
                     title: "待批班级",
                     group: "markingManger"

@@ -14,7 +14,7 @@ class remoteList extends Component {
     render() {
         return (
             <>
-                 <h2 style={{padding: "20px 0px"}}>添加试题</h2>
+                 <h2 style={{padding: "20px 0px"}}>查看试题</h2>
         <Content
           style={{
             background: '#fff',
@@ -23,7 +23,8 @@ class remoteList extends Component {
             minHeight: 280,
           }}
         >
-          12345
+
+        
         </Content>
             </>
         );

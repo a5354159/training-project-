@@ -17,7 +17,7 @@ class add extends Component {
 
   render() {
     return (
-      <>
+      <div>
         <h2 style={{ padding: "20px 0px" }}>添加试题</h2>
         <Content
           style={{
@@ -68,13 +68,13 @@ class add extends Component {
 
             {/* 考试类型 */}
             <div>
-              <div class="ant-row ant-form-item">
-                <div class="ant-form-item-label">
-                  <label class="">请选择考试类型</label>
+              <div className="ant-row ant-form-item">
+                <div className="ant-form-item-label">
+                  <label className="">请选择考试类型</label>
                 </div>
-                <div class="ant-form-item-control-wrapper">
-                  <div class="ant-form-item-control">
-                    <span class="ant-form-item-children">
+                <div className="ant-form-item-control-wrapper">
+                  <div className="ant-form-item-control">
+                    <span className="ant-form-item-children">
                       <Select
                         labelInValue
                         defaultValue={{ key: "周考1" }}
@@ -93,13 +93,13 @@ class add extends Component {
                 </div>
               </div>
 
-              <div class="ant-row ant-form-item">
-                <div class="ant-form-item-label">
-                  <label class="">请选择课程类型</label>
+              <div className="ant-row ant-form-item">
+                <div className="ant-form-item-label">
+                  <label className="">请选择课程类型</label>
                 </div>
-                <div class="ant-form-item-control-wrapper">
-                  <div class="ant-form-item-control">
-                    <span class="ant-form-item-children">
+                <div className="ant-form-item-control-wrapper">
+                  <div className="ant-form-item-control">
+                    <span className="ant-form-item-children">
                       <Select
                         labelInValue
                         defaultValue={{ key: "lucy" }}
@@ -116,13 +116,13 @@ class add extends Component {
                 </div>
               </div>
 
-              <div class="ant-row ant-form-item">
-                <div class="ant-form-item-label">
-                  <label class="">请选择题目类型</label>
+              <div className="ant-row ant-form-item">
+                <div className="ant-form-item-label">
+                  <label className="">请选择题目类型</label>
                 </div>
-                <div class="ant-form-item-control-wrapper">
-                  <div class="ant-form-item-control">
-                    <span class="ant-form-item-children">
+                <div className="ant-form-item-control-wrapper">
+                  <div className="ant-form-item-control">
+                    <span className="ant-form-item-children">
                       <Select
                         labelInValue
                         defaultValue={{ key: "lucy" }}
@@ -159,10 +159,10 @@ class add extends Component {
               </div>
             </div>
 
-            <div class="EditQuestions_footBtn__3cky1">
+            <div className="EditQuestions_footBtn__3cky1">
               <button
                 type="button"
-                class="ant-btn ant-btn-primary ant-btn-lg"
+                className="ant-btn ant-btn-primary ant-btn-lg"
                 style={{
                   background:
                     "linear-gradient(-90deg,#4e75ff,#0139fd)!important"
@@ -173,7 +173,7 @@ class add extends Component {
             </div>
           </div>
         </Content>
-      </>
+      </div>
     );
   }
 }
