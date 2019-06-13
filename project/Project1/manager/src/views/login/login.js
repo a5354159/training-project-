@@ -33,6 +33,7 @@ function Login(props) {
           user_name: values.username,
           user_pwd: values.password
         });
+      // props.history.push('/homepage')
       }
     });
   };

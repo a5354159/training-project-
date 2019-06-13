@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
 class remoteList extends Component {
     constructor(props) {
@@ -10,7 +14,17 @@ class remoteList extends Component {
     render() {
         return (
             <>
-                remoteList
+                 <h2 style={{padding: "20px 0px"}}>添加试题</h2>
+        <Content
+          style={{
+            background: '#fff',
+            padding: 24,
+            margin: 0,
+            minHeight: 280,
+          }}
+        >
+          12345
+        </Content>
             </>
         );
     }
