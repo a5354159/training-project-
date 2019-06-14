@@ -12,7 +12,10 @@ import {
   Button,
   List,
   Avatar,
-  Skeleton
+  Skeleton,
+  Form,
+   Input, 
+   Checkbox
 } from "antd";
 import { connect } from "dva";
 const { SubMenu } = Menu;
@@ -31,11 +34,13 @@ const tagsFromServer = [
   "javaScript的高级",
   "节点高级"
 ];
+let arrs=['周考一','简答题']
 class remoteList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTags: []
+      selectedTags: [],
+      arrs:['周考一','简答题']
     };
     // console.log(props.loading);
   }
@@ -51,11 +56,34 @@ class remoteList extends Component {
     this.setState({ selectedTags: nextSelectedTags });
   }
   handleChanges(value) {
-    // console.log(value);
+    if(!value){
+      console.log('kong');
+    }else{
+      // arrs.push(value.key)
+      console.log(this.state.arrs)
+      var a=this.state.arrs.findIndex(item=>{return item==value.key})
+      console.log(a)
+      if(a==-1){
+        this.state.arrs.splice(1,1,value.key)
+        console.log(this.state.arrs)
+      }
+    }
   }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        // console.log('Received values of form: ', values);
+        console.log(values)
+      }
+    });
+  };
+
   render() {
-    // const {arr}=this.props
-    // console.log('aaaa',arr.data);
+    
+    const { getFieldDecorator } = this.props.form;
+    const {arr}=this.props
     
     const { selectedTags } = this.state;
     return (
@@ -99,8 +127,8 @@ class remoteList extends Component {
                     labelInValue
                     defaultValue={{ key: "周考一" }}
                     style={{ width: 120 }}
-                    onChange={() => {
-                      this.handleChanges();
+                    onChange={(e) => {
+                      this.handleChanges(e);
                     }}
                   >
                     <Option value="周考一">周考一</Option>
@@ -116,8 +144,8 @@ class remoteList extends Component {
                     labelInValue
                     defaultValue={{ key: "手写代码" }}
                     style={{ width: 120 }}
-                    onChange={() => {
-                      this.handleChanges();
+                    onChange={(e) => {
+                      this.handleChanges(e);
                     }}
                   >
                     <Option value="简答题">简答题</Option>
@@ -133,6 +161,9 @@ class remoteList extends Component {
                     type="primary"
                     icon="search"
                     style={{ color: "#fff" }}
+                    onClick={() => {
+                      this.handleChanges();
+                    }}
                   >
                     Search
                   </Button>
@@ -155,6 +186,51 @@ class remoteList extends Component {
             borderRadius:'15px'
           }}
         >
+
+
+
+
+<Form onSubmit={this.handleSubmit} className="login-form">
+        <Form.Item>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Username"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }],
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+            />,
+          )}
+        </Form.Item>
+        <Form.Item>
+
+          
+          <Button type="primary" htmlType="submit" className="login-form-button">
+            Log in
+          </Button>
+        </Form.Item>
+      </Form>
+
+
+
+
+
+
+
+
+
+
+        
           <Relist data={this.props.arr}/>
         </Content>
       </>
@@ -181,4 +257,4 @@ const mapDisaptchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDisaptchToProps
-)(remoteList);
+)(Form.create({})(remoteList));
