@@ -19,13 +19,9 @@ export default {
   
     // 异步操作
     effects: {
-    //   *fetch({ payload }, { call, put }) {  // eslint-disable-line
-    //     yield put({ type: 'save' });
-    //   },
+    
       *getQuestion({payload}, { call, put }){
-        // console.log(payload,'a')
         let data = yield call(getQuestion);
-    //   console.log("data...", data);
         yield put({
             type: "getQuestions",
             payload: data

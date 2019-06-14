@@ -16,17 +16,17 @@ export function query(params) {
   });
 }
 
-// export function selec(params) {
-//   return request({
-//     url:'/exam/subject',
-//     method:'GET'
-//   });
-// }
-
-
-export function selec(params) {
+export function addlist(params) {
   return request({
-    url:'/exam/questions/new',
+    url:'/exam/subject',
     method:'GET'
   });
 }
+
+
+// export function selec(params) {
+//   return request({
+//     url:'/exam/questions/new',
+//     method:'GET'
+//   });
+// }
