@@ -65,9 +65,11 @@ class remoteList extends Component {
           style={{
             background: "#fff",
             padding: 24,
-            margin: 0,
-            minHeight: 280
+            margin:' 0 0 20px 0',
+            height: 240,
+            borderRadius:'15px'
           }}
+          className='top_main'
         >
           {this.props.loading.global ? (
             <div>
@@ -75,9 +77,10 @@ class remoteList extends Component {
             </div>
           ) : (
             <div className="contnts">
-              <div>
+              <div className="contnts_wrap">
                 <h6 style={{ marginRight: 8, display: "inline" }}>课程类型:</h6>
-                {tagsFromServer.map(tag => (
+                <div  className="contnts_list">
+                  {tagsFromServer.map(tag => (
                   <CheckableTag
                     key={tag}
                     checked={selectedTags.indexOf(tag) > -1}
@@ -86,6 +89,8 @@ class remoteList extends Component {
                     {tag}
                   </CheckableTag>
                 ))}
+                </div>
+                
               </div>
               <div>
                 <div>
@@ -135,13 +140,19 @@ class remoteList extends Component {
               </div>
             </div>
           )}
+
+          <div>
+
+            
+          </div>
         </Content>
         <Content
         style={{
             background: "#fff",
             padding: 24,
-            margin: 5,
-            minHeight: 280
+            margin: 0,
+            minHeight: 280,
+            borderRadius:'15px'
           }}
         >
           <Relist data={this.props.arr}/>
@@ -160,10 +171,10 @@ const mapStateToProps = state => {
 const mapDisaptchToProps = dispatch => {
   return {
     query(payload) {
-    //   dispatch({
-    //     type: "list/query",
-    //     payload
-    //   });
+      dispatch({
+        type: "list/query",
+        payload
+      });
     }
   };
 };
