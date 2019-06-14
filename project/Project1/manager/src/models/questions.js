@@ -2,11 +2,11 @@ import { login,
   query, 
   subject, 
   subjectType,  // 试题类型
-  getQuestionsType
+  getQuestionsType,getQuestion,insertQuestionsType 
 } from "../services";
 export default {
   // 命名空间
-  namespace: "questions",
+  namespace: "Question",
 
   // 模块内部的状态
   state: {
@@ -43,12 +43,27 @@ export default {
         type: "getQuestionsType_data",
         payload: getQuestionsTypes.data
       })
+    },
+    *getQuestion({payload}, { call, put }){
+      let data = yield call(getQuestion);
+      yield put({
+          type: "getQuestions",
+          payload: data
+        });
+    },
+    *insertQuestionsType({payload},{call,put}){
+      let data = yield call(insertQuestionsType,payload);
+      console.log(';data...........;',data)
+      yield put({
+          type: "insertQuestionsType",
+          payload: data
+        });
     }
   },
 
   // 同步操作
   reducers: {
-    
+    // getFieldDecorator
     query(state, action) {
       return { ...state, query: action.payload };
     },
@@ -57,6 +72,12 @@ export default {
     },
     remote_subjectType(state, action) {
       return { ...state, remote_subjectType: action.payload };
+    },
+    getQuestions(state, action) {
+      return { ...state, arr:action.payload };
+    },
+    insertQuestionsType(state, action) {
+      return { ...state, arr:action.payload };
     },
     getQuestionsType_data(state, action) {
       return { ...state, getQuestionsType_data: action.payload };

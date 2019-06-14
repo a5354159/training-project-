@@ -1,11 +1,11 @@
-import React, { Component,useState } from "react";
+import React, { Component } from "react";
 import {
   Layout,
   Menu,
-  Breadcrumb,
-  Icon,
+  // Breadcrumb,
+  // Icon,
   Table,
-  Divider,
+  // Divider,
   Modal,
   Input,
   Form,
@@ -14,41 +14,65 @@ import {
 // import { Layout, Menu, Select, Spin ,Input,Form,Button} from "antd";
 import { connect } from "dva";
 
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
-    // let [showDialog,updateDialog]=useState(false)
+// const { SubMenu } = Menu;
+const { Content } = Layout;
+// let [showDialog,updateDialog]=useState(false)
 
 class addlist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
+      valus: ""
     };
-    
   }
   showModal = () => {
     this.setState({
-      visible: true,
+      visible: true
     });
   };
 
-  handleOk = e => {
-    // console.log(e);
-    this.setState({
-      visible: false,
-    });
-  };
-
+  
   handleCancel = e => {
-    // console.log(e);
+    console.log(e);
     this.setState({
-      visible: false,
+      visible: false
     });
   };
-      
+  addtype(e) {
+    this.setState({
+      values: e.target.value
+    });
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values);
+      }
+    });
+  };
+  handleOk = e => {
+    this.setState({
+      visible: false
+    });
+    console.log("1");
+    this.props.Question({
+      text:this.state.valus,
+      sort:this.rns()
+    })
+    console.log(this.props)
+  };
+  rns = () => {
+    return Math.floor(Math.random() * 100) + 1+'';
+  };
   render() {
-    const { getQuestion } = this.props;
-    const { flag } = this.state
+    // const { getQuestion } = this.props;
+    // const { flag } = this.state;
+    {
+      console.log(this.rns());
+    }
     const { getFieldDecorator } = this.props.form;
     const columns = [
       {
@@ -100,7 +124,6 @@ class addlist extends Component {
             <Button
               type="button"
               className="ant-btn ant-btn-primary ant-btn-lg"
-             
               onClick={this.showModal}
             >
               <i aria-label="图标: plus" className="anticon anticon-plus">
@@ -119,51 +142,64 @@ class addlist extends Component {
               <span style={{ color: "#fff" }}>添加类型:</span>
             </Button>
           </div>
-
           <div>
-            <Modal visible={this.state.visible} onOk={this.handleOk}
-          onCancel={this.handleCancel}>
+            <Modal
+              visible={this.state.visible}
+              onOk={this.handleOk}
+              onCancel={this.handleCancel}
+            >
               <Form onSubmit={this.handleSubmit} className="login-form">
-                <Form.Item>
+                {/* <Form.Item>
                   {getFieldDecorator("username", {
                     rules: [
                       { required: true, message: "Please input your username!" }
                     ]
                   })(
                     <Input
-                      // prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                      // value={this.state.valus}
                       placeholder="请输入试题类型"
+                      onChange={e => {
+                        this.addtype(e);
+                      }}
                     />
                   )}
-                </Form.Item>
+                </Form.Item> */}
+                <Form.Item>
+          {getFieldDecorator('username', {
+            rules: [{ required: true, message: 'Please input your username!' }],
+          })(
+            <Input
+              placeholder="Username"
+            />,
+          )}
+        </Form.Item>
               </Form>
             </Modal>
-
             <Table columns={columns} dataSource={data} size="middle" />
           </div>
         </Content>
       </div>
     );
   }
-  componentDidMount() {
-    this.props.getQuestion();
-  }
-  
+  // componentDidMount() {
+  //   this.rns()
+  // }
 }
 
 const mapStateToProps = state => {
   // console.log("state:", state);
   return {
+    ...state.Question,
     loading: state.loading.global
   };
 };
 
 const mapDisaptchToProps = dispatch => {
   return {
-    getQuestion(payload) {
+    Question(payload) {
       // console.log(payload)
       // dispatch({
-      //   type: "getQuestion/getQuestion",
+      //   type: "Question/insertQuestionsType",
       //   payload
       // });
     }

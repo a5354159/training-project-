@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import { Route, Switch, NavLink, Redirect } from "dva/router";
-import { connect } from "dva";
+// import { connect } from "dva";
+// import Add from "../../components/add";
+// import Wodetongzhuoshizhenghao from "../../components/wodetongzhuishizhenghao";
+// src\components\wodetongzhuishizhenghao.js
+// import Addlist from "../../components/addlist";
 import RemoteList from "../../components/remoteList";
 import style from "./home_style.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-import { Menu, Icon, Button, Layout } from "antd";
+
+import { Menu, Icon, Layout, Dropdown } from "antd";
+
 import Add from "@/components/add.js";
 import Addlist from "@/components/addlist.js";
 
@@ -15,15 +21,34 @@ class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      collapsed: false
+      collapsed: false,
+      visible: false,
     };
   }
-  // toggleCollapsed = () => {
-  //   this.setState({
-  //     collapsed: !this.state.collapsed
-  //   });
-  // };
+  handleMenuClick = e => {
+    if (e.key === '4') {
+      this.setState({ visible: false });
+    }
+  };
+
+  handleVisibleChange = flag => {
+    this.setState({ visible: flag });
+  };
+  toggleCollapsed = () => {
+    this.setState({
+      collapsed: !this.state.collapsed
+    });
+  };
   render() {
+    // console.log(this.props.arr);
+    const menu = (
+      <Menu onClick={this.handleMenuClick}>
+        <Menu.Item key="1">个人中心</Menu.Item>
+        <Menu.Item key="2">我的班级</Menu.Item>
+        <Menu.Item key="3">设置</Menu.Item>
+        <Menu.Item key="4">退出</Menu.Item>
+      </Menu>
+    );
     return (
       <Layout className={style.wrap} style={{ flexDirection: "column" }}>
         <Header className={style.land_top} style={{ background: "#fff" }}>
@@ -35,7 +60,15 @@ class Homepage extends Component {
               <span>
                 <img src="https://cdn.nlark.com/yuque/0/2019/png/anonymous/1547609339813-e4e49227-157c-452d-be7e-408ca8654ffe.png?x-oss-process=image/resize,m_fill,w_48,h_48/format,png" />
               </span>{" "}
-              chenmanjie
+              <Dropdown
+                overlay={menu}
+                onVisibleChange={this.handleVisibleChange}
+                visible={this.state.visible}
+              >
+                <a className="ant-dropdown-link" href="#">
+                 chenmanjie
+                </a>
+              </Dropdown>
             </span>
           </div>
         </Header>

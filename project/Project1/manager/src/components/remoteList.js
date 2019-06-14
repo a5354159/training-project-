@@ -144,8 +144,7 @@ class remoteList extends Component {
             minHeight: 280
           }}
         >
-        
-          <Relist />
+          <Relist data={this.props.arr}/>
         </Content>
       </>
     );

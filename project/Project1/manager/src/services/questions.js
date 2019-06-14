@@ -8,3 +8,15 @@ export function getQuestion(params){
     // data: params
   })
 }
+
+
+export function insertQuestionsType(params){
+  return request({
+    url: '/exam/insertQuestionsType',
+    method: 'GET',
+    data: params
+  })
+}
+
+
+
