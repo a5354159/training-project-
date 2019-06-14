@@ -17,9 +17,9 @@ export default {
   // 异步操作
   effects: {
     *query({ payload }, { call, put }) {
-      console.log("payload...", payload, query);
+      // console.log("payload...", payload, query);
       let data = yield call(query);
-      console.log("data......", data);
+      // console.log("data......", data);
       yield put({ type: "lists", payload: data });
     },
     *add({payload}, { call, put }){
@@ -31,7 +31,7 @@ export default {
   // 同步操作
   reducers: {
     lists(state, action) {
-      console.log(state, action);
+      // console.log(state, action);
       return { ...state, arr: action.payload };
     }
   }

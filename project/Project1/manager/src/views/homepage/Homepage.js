@@ -1,17 +1,10 @@
 import React, { Component } from "react";
 import { Route, Switch, NavLink, Redirect } from "dva/router";
 import { connect } from "dva";
-// import Add from "../../components/add";
-// import Wodetongzhuoshizhenghao from "../../components/wodetongzhuishizhenghao";
-// src\components\wodetongzhuishizhenghao.js
-// import Addlist from "../../components/addlist";
 import RemoteList from "../../components/remoteList";
-
 import style from "./home_style.css";
 import "antd/dist/antd.css"; // or 'antd/dist/antd.less'
-
 import { Menu, Icon, Button, Layout } from "antd";
-
 import Add from "@/components/add.js";
 import Addlist from "@/components/addlist.js";
 
@@ -25,15 +18,12 @@ class Homepage extends Component {
       collapsed: false
     };
   }
-
-  toggleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed
-    });
-  };
+  // toggleCollapsed = () => {
+  //   this.setState({
+  //     collapsed: !this.state.collapsed
+  //   });
+  // };
   render() {
-    // console.log(this.props.arr);
-
     return (
       <Layout className={style.wrap} style={{ flexDirection: "column" }}>
         <Header className={style.land_top} style={{ background: "#fff" }}>
@@ -63,7 +53,6 @@ class Homepage extends Component {
               mode="inline"
               theme="dark"
               className={style.list_style}
-              style={{ width: 200, background: "red" }}
             >
               <SubMenu
                 key="homepage"

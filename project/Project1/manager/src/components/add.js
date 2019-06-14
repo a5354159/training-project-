@@ -1,27 +1,55 @@
 import React, { Component } from "react";
 import { connect } from "dva";
-import { Layout, Menu, Breadcrumb, Icon, Select , Spin } from "antd";
-import style from './style.css'
-const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
+import { Layout, Button, Icon, Select, Spin, Modal } from "antd";
+import "./style.scss";
+import Editor from "for-editor";
+const confirm = Modal.confirm;
+const { Content } = Layout;
 const { Option } = Select;
-
-
 class add extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-   
+    this.state = {
+      value: "",
+      value1: "",
+      detail1: [],
+      subject: [],
+      getQuestionsType: [],
+      visible: false
+    };
   }
-  
+  select1 = value => {
+    console.log(`selected ${value}`);
+  };
   handleChange(value) {
-    console.log(value); // { key: "lucy", label: "Lucy (101)" }
+    this.setState({
+      value
+    });
   }
-  
+
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
+
+  handleCancel = e => {
+    console.log(e);
+    this.setState({
+      visible: false
+    });
+  };
   render() {
-    // console.log(this.props)
-    // const {getQuestion}=this.props
-    // console.log(getQuestion)
+    let { value, value1, detail1, subject, getQuestionsType } = this.state;
+    // let {remote_subjectType}=this.props
+    // console.log(this.props.remote_subjectType)
     return (
       <div>
         <h2 style={{ padding: "20px 0px" }}>添加试题</h2>
@@ -34,8 +62,11 @@ class add extends Component {
             borderRadius: 15
           }}
         >
-        
-          {this.props.loading?<div className={style.loading}><Spin /></div>:null}
+          {this.props.loading ? (
+            <div className="loading">
+              <Spin />
+            </div>
+          ) : null}
           <div>
             <h3>题目信息</h3>
             <div className="ant-row ant-form-item">
@@ -50,6 +81,12 @@ class add extends Component {
                   placeholder="请输入题目标题，不超过20个字"
                   type="text"
                   style={{ width: "400px" }}
+                  onChange={e => {
+                    // console.log(e.target.value)
+                    this.setState({
+                      value1: e.target.value
+                    });
+                  }}
                 />
               </div>
             </div>
@@ -60,13 +97,13 @@ class add extends Component {
                   题目主题
                 </label>
               </div>
-              <div
-                className="for-container"
-              >
-                <textarea
+              <div className="for-container">
+                <Editor value={value} onChange={this.handleChange.bind(this)} />
+
+                {/* <textarea
                   placeholder="请输入内容..."
                   style={{ width: "100%", height: "150px" }}
-                />
+                /> */}
               </div>
             </div>
 
@@ -83,13 +120,18 @@ class add extends Component {
                         defaultValue={{ key: "周考1" }}
                         style={{ width: 120 }}
                         onChange={() => {
-                          this.handleChange();
+                          this.select1.bind(this);
                         }}
                       >
-                        <Option value="zk1">周考1</Option>
-                        <Option value="zk2">周考2</Option>
-                        <Option value="zk3">周考3</Option>
-                        <Option value="yk">月考</Option>
+                        {detail1 &&
+                          detail1.map((el, i) => {
+                            // console.log(el)
+                            return (
+                              <Option key={i} value={el.exam_name}>
+                                {el.exam_name}
+                              </Option>
+                            );
+                          })}
                       </Select>
                     </span>
                   </div>
@@ -105,14 +147,21 @@ class add extends Component {
                     <span className="ant-form-item-children">
                       <Select
                         labelInValue
-                        defaultValue={{ key: "lucy" }}
+                        defaultValue={{ key: "" }}
                         style={{ width: 120 }}
                         onChange={() => {
-                          this.handleChange();
+                          this.select1.bind(this);
                         }}
                       >
-                        <Option value="jack">JavaScript上</Option>
-                        <Option value="lucy">JavaScript下</Option>
+                        {subject &&
+                          subject.map((el, i) => {
+                            // console.log(el)
+                            return (
+                              <Option key={i} value={el.subject_text}>
+                                {el.subject_text}
+                              </Option>
+                            );
+                          })}
                       </Select>
                     </span>
                   </div>
@@ -128,14 +177,21 @@ class add extends Component {
                     <span className="ant-form-item-children">
                       <Select
                         labelInValue
-                        defaultValue={{ key: "lucy" }}
+                        defaultValue={{ key: "" }}
                         style={{ width: 120 }}
                         onChange={() => {
-                          this.handleChange();
+                          this.select1.bind(this);
                         }}
                       >
-                        <Option value="jack">J简答题</Option>
-                        <Option value="lucy">代码补全</Option>
+                        {getQuestionsType &&
+                          getQuestionsType.map((el, i) => {
+                            // console.log(el)
+                            return (
+                              <Option key={i} value={el.questions_type_text}>
+                                {el.questions_type_text}
+                              </Option>
+                            );
+                          })}
                       </Select>
                     </span>
                   </div>
@@ -149,48 +205,72 @@ class add extends Component {
                   答案信息
                 </label>
               </div>
-              <div
-                className="for-container"
-              >
-                <textarea
+              <div className="for-container">
+                <Editor value={value} onChange={this.handleChange.bind(this)} />
+                {/* <textarea
                   placeholder="请输入内容..."
                   style={{ width: "100%", height: "150px" }}
-                />
+                /> */}
               </div>
             </div>
-
             <div className="EditQuestions_footBtn__3cky1">
-              <button
-                type="button"
-                className="ant-btn ant-btn-primary ant-btn-lg"
-                style={{
-                  background:
-                    "linear-gradient(-90deg,#4e75ff,#0139fd)!important"
-                }}
+              <Button type="primary" onClick={this.showModal}>
+                <span style={{ color: "#fff" }} onClick={this.btn.bind(this)}>
+                  提 交
+                </span>
+              </Button>
+            </div>
+            <div>
+              <Modal
+                title="Basic Modal"
+                visible={this.state.visible}
+                onOk={this.handleOk}
+                onCancel={this.handleCancel}
               >
-                <span style={{ color: "#fff" }}>提 交</span>
-              </button>
+                <p>确定添加吗</p>
+              </Modal>
             </div>
           </div>
         </Content>
       </div>
     );
   }
-  componentDidMount(){
-    this.props.query()
-
+  componentDidMount() {
+    this.props.subjectType();
   }
+
+  componentWillReceiveProps(newProps) {
+    this.setState({
+      detail1: newProps.remote_subjectType,
+      subject: newProps.subject,
+      getQuestionsType: newProps.getQuestionsType_data
+    });
+  }
+
+  btn = () => {
+    // confirm({
+    //   title: "你确定要添加这道试题吗?",
+    //   content: "真的要添加吗？",
+    //   okText: "确定",
+    //   okType: "danger",
+    //   cancelText: "取消",
+    //   onOk() {
+    //     console.log("OK");
+    //   },
+    //   onCancel() {
+    //     console.log("Cancel");
+    //   }
+    // });
+  };
 }
 let mapStateToProp = state => {
-
-  return { ...state.list };
+  return { ...state.questions };
 };
 let mapDispatchToProp = dispatch => {
   return {
-    query(payload) {
+    subjectType() {
       dispatch({
-        type: "list/query",
-        payload
+        type: "questions/question"
       });
     }
   };

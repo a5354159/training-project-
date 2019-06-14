@@ -37,7 +37,7 @@ class remoteList extends Component {
     this.state = {
       selectedTags: []
     };
-    console.log(props.loading);
+    // console.log(props.loading);
   }
   componentDidMount() {
     this.props.query();
@@ -47,15 +47,16 @@ class remoteList extends Component {
     const nextSelectedTags = checked
       ? [...selectedTags, tag]
       : selectedTags.filter(t => t !== tag);
-    console.log("You are interested in: ", nextSelectedTags);
+    // console.log("You are interested in: ", nextSelectedTags);
     this.setState({ selectedTags: nextSelectedTags });
   }
   handleChanges(value) {
-    console.log(value);
+    // console.log(value);
   }
   render() {
-    console.log(this.props.arr);
-
+    // const {arr}=this.props
+    // console.log('aaaa',arr.data);
+    
     const { selectedTags } = this.state;
     return (
       <>
@@ -143,6 +144,7 @@ class remoteList extends Component {
             minHeight: 280
           }}
         >
+        
           <Relist />
         </Content>
       </>
@@ -159,10 +161,10 @@ const mapStateToProps = state => {
 const mapDisaptchToProps = dispatch => {
   return {
     query(payload) {
-      dispatch({
-        type: "list/query",
-        payload
-      });
+    //   dispatch({
+    //     type: "list/query",
+    //     payload
+    //   });
     }
   };
 };

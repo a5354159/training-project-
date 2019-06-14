@@ -13,7 +13,6 @@ const app = dva(createLoading());
 app.use(createLoading());
 // 3. Model
 app.model(require('./models/user').default);
-app.model(require('./models/selec').default);
 app.model(require('./models/questions').default);
 
 app.model(require('./models/list').default);

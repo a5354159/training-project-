@@ -33,14 +33,14 @@ class addlist extends Component {
   };
 
   handleOk = e => {
-    console.log(e);
+    // console.log(e);
     this.setState({
       visible: false,
     });
   };
 
   handleCancel = e => {
-    console.log(e);
+    // console.log(e);
     this.setState({
       visible: false,
     });
@@ -152,7 +152,7 @@ class addlist extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("state:", state);
+  // console.log("state:", state);
   return {
     loading: state.loading.global
   };
@@ -162,10 +162,10 @@ const mapDisaptchToProps = dispatch => {
   return {
     getQuestion(payload) {
       // console.log(payload)
-      dispatch({
-        type: "getQuestion/getQuestion",
-        payload
-      });
+      // dispatch({
+      //   type: "getQuestion/getQuestion",
+      //   payload
+      // });
     }
   };
 };
