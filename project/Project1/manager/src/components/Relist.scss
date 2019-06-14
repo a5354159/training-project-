@@ -1,0 +1,10 @@
+:global{
+    .ant-layout-content{
+        height: 100%;
+        width: 100%;
+    }
+    .ant-list-item{
+        display: flex;
+        justify-content: space-between
+    }
+}

@@ -31,7 +31,8 @@ class add extends Component {
             padding: 24,
             margin: 0,
             minHeight: 280,
-            borderRadius: 15
+            borderRadius: 15,
+            overflow: 'auto',
           }}
         >
         
