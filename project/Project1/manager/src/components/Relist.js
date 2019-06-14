@@ -1,36 +1,30 @@
-import React from 'react'
-import { List, Avatar, Button, Skeleton } from 'antd';
-function Relist(props){
-    let list=[
-        {
-            name:111
-        },
-        {
-            name:111
-        },{
-            name:111
-        }
-    ]
-    return (
-        <List
-            className="demo-loadmore-list"
-            itemLayout="horizontal"
-            dataSource={list}
-            style={{padding:20}}
-            renderItem={item => (
-            <List.Item actions={[<a>编辑</a>]} style={{display:'flex',justifyContent:'space-between'}}>
-                <div>
-                    <p>机器人归位</p>
-                    <div className="color">
-                        <p className="content_every_cont_left_left_y">代码不全</p>
-                        <p className="content_every_cont_left_center_y">javasxript</p>
-                        <p className="content_every_cont_left_right_y">周考一</p>
-                    </div>
-                    <p>dingshaoshan 发布</p>
-                </div>
-            </List.Item>
+import { List, Avatar } from 'antd';
+const data = [
+  {
+    title: 'Ant Design Title 1',
+  },
+  {
+    title: 'Ant Design Title 2',
+  },
+  {
+    title: 'Ant Design Title 3',
+  },
+  {
+    title: 'Ant Design Title 4',
+  },
+];
+const Relist = (props)=>{
+    return (<List
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={item => (
+          <List.Item>
+            <List.Item.Meta
+              title={<a href="https://ant.design">{item.title}</a>}
+              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+            />
+          </List.Item>
         )}
-      />
-    )
+      />)
 }
 export default Relist
