@@ -64,7 +64,12 @@ class remoteList extends Component {
       var a=this.state.arrs.findIndex(item=>{return item==value.key})
       console.log(a)
       if(a==-1){
-        this.state.arrs.splice(1,1,value.key)
+        if(value.key=='简答题'){
+          this.state.arrs.splice(1,1,value.key)
+        }else{
+          this.state.arrs.splice(0,1,value.key)
+          
+        }
         console.log(this.state.arrs)
       }
     }
