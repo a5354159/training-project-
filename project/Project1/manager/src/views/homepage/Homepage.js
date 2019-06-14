@@ -1,7 +1,6 @@
-
 import React, { Component } from "react";
-import { Router, Route, Switch, NavLink } from "dva/router";
-
+import { Route, Switch, NavLink, Redirect } from "dva/router";
+import { connect } from "dva";
 // import Add from "../../components/add";
 // import Wodetongzhuoshizhenghao from "../../components/wodetongzhuishizhenghao";
 // src\components\wodetongzhuishizhenghao.js
@@ -17,12 +16,15 @@ import Add from "@/components/add.js";
 import Addlist from "@/components/addlist.js";
 
 const { SubMenu } = Menu;
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 class Homepage extends Component {
-  state = {
-    collapsed: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      collapsed: false
+    };
+  }
 
   toggleCollapsed = () => {
     this.setState({
@@ -30,6 +32,8 @@ class Homepage extends Component {
     });
   };
   render() {
+    // console.log(this.props.arr);
+
     return (
       <Layout className={style.wrap} style={{ flexDirection: "column" }}>
         <Header className={style.land_top} style={{ background: "#fff" }}>
@@ -131,11 +135,10 @@ class Homepage extends Component {
             </Menu>
           </Sider>
           <Content style={{ overflow: "auto" }}>
-            <div
-              style={{ padding: '14px 24px 24px' }}
-            >
+            <div style={{ padding: "14px 24px 24px" }}>
               <Switch>
-                <Route path="/homepage/add" component={Add} ></Route>
+                <Redirect exact from="/" to="/homepage/add" />
+                <Route path="/homepage/add" component={Add} />
                 <Route path="/homepage/addlist" component={Addlist} />
                 <Route path="/homepage/remote" component={RemoteList} />
               </Switch>
@@ -148,5 +151,3 @@ class Homepage extends Component {
 }
 
 export default Homepage;
-
-

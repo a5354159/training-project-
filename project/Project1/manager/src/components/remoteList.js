@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-
-// import { Layout ,Checkbox, Button} from 'antd';
-
 import "./remoteList.scss";
 import Relist from "./Relist";
 import {
@@ -139,7 +136,7 @@ class remoteList extends Component {
           )}
         </Content>
         <Content
-          style={{
+        style={{
             background: "#fff",
             padding: 24,
             margin: 5,

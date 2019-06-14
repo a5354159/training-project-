@@ -1,7 +1,6 @@
-import React, { Component,useEffect ,useState} from "react";
-
-import { Layout, Menu, Select, Spin ,Input,Form,Button} from "antd";
+import React, { Component } from "react";
 import { connect } from "dva";
+import { Layout, Menu, Breadcrumb, Icon, Select , Spin } from "antd";
 import style from './style.css'
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -12,10 +11,7 @@ class add extends Component {
   constructor(props) {
     super(props);
     this.state = {};
-    // useEffect(()=>{
-    //   props.getQuestion()
-    // },[props.getQuestion])
-    // let [showDialog,updateDialog]=useState(false)
+   
   }
   
   handleChange(value) {
@@ -181,28 +177,25 @@ class add extends Component {
     );
   }
   componentDidMount(){
-    this.props.getQuestion()
+    this.props.query()
 
   }
 }
+let mapStateToProp = state => {
 
-const mapStateToProps = state => {
-  console.log("state:", state);
-  return {
-    loading:state.loading.global
-  };
+  return { ...state.list };
 };
-
-const mapDisaptchToProps = dispatch => {
+let mapDispatchToProp = dispatch => {
   return {
-    getQuestion(payload) {
-      console.log(payload)
-      // dispatch({
-      //   type: "getQuestion/getQuestion",
-      //   payload
-      // });
+    query(payload) {
+      dispatch({
+        type: "list/query",
+        payload
+      });
     }
   };
 };
-
-export default connect(mapStateToProps,mapDisaptchToProps)(add);
+export default connect(
+  mapStateToProp,
+  mapDispatchToProp
+)(add);
