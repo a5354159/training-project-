@@ -14,3 +14,29 @@ export function query() {
     method:'GET'
   });
 }
+export function addSubject(params){
+  return request({
+    url: '/exam/questions',
+    method: 'POST',
+    data: params
+  })
+}
+export function remoteSubject(params){
+  return request({
+    url: '/exam/questions/update',
+    method: 'PUT',
+    data: params
+  })
+}
+export function subject(){
+  return request({
+    url: '/exam/subject',
+    method: 'GET',
+  })
+}
+export function subjectType(params){
+  return request({
+    url: '/exam/examType',
+    method: 'GET',
+  })
+}

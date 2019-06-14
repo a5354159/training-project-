@@ -1,4 +1,4 @@
-import { query } from "../services";
+import { query,addSubject,remoteSubject,subject,subjectType } from "../services";
 export default {
   // 命名空间
   namespace: "list",
@@ -21,7 +21,11 @@ export default {
       let data = yield call(query);
       console.log("data......", data);
       yield put({ type: "lists", payload: data });
+    },
+    *add({payload}, { call, put }){
+      yield call(addSubject,payload)
     }
+    // *remote({payload},{call,put})
   },
 
   // 同步操作
